@@ -1,0 +1,21 @@
+# =============================================================================
+# requirements.txt — Project Dependencies
+# =============================================================================
+
+# Core data manipulation
+pandas>=2.2.3              # Wheels available for Python 3.13 on Windows
+numpy>=2.1.0               # Wheels available for Python 3.13
+openpyxl>=3.1.2            # Excel read/write support
+
+# Database connectors
+SQLAlchemy>=2.0.36         # ORM and DB connection abstraction
+PyMySQL>=1.1.1             # MySQL driver (pure Python)
+cryptography>=42.0.0       # Required by PyMySQL for MySQL 8.0+ auth (caching_sha2_password)
+pyodbc>=5.2.0              # SQL Server via ODBC
+
+# Configuration & environment
+PyYAML>=6.0.2              # Parse config.yaml
+python-dotenv>=1.0.1       # Load .env files
+
+# Logging & utilities
+colorlog>=6.9.0            # Colored console logging

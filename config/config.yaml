@@ -1,0 +1,57 @@
+# =============================================================================
+# config.yaml — Central Configuration for Data Pipeline
+# =============================================================================
+# All sensitive credentials should be set as environment variables.
+# Use a .env file for local development (never commit to version control).
+# =============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOURCE: MySQL Database
+# ─────────────────────────────────────────────────────────────────────────────
+mysql_source:
+  host: "${MYSQL_SOURCE_HOST}"        # e.g., localhost
+  port: 3306
+  database: "${MYSQL_SOURCE_DB}"      # e.g., sales_db
+  username: "${MYSQL_SOURCE_USER}"    # e.g., root
+  password: "${MYSQL_SOURCE_PASS}"
+  table: "orders"                     # Table to extract from
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOURCE: SQL Server Database
+# ─────────────────────────────────────────────────────────────────────────────
+sqlserver_source:
+  host: "${SQLSERVER_HOST}"           # e.g., DESKTOP-ABC\SQLEXPRESS
+  # port: 1433                        # OMIT for named instances like HOSTNAME\\SQLEXPRESS
+  #                                   # Named instances use dynamic ports (SQL Server Browser resolves them)
+  database: "${SQLSERVER_DB}"         # e.g., inventory_db
+  username: "${SQLSERVER_USER}"
+  password: "${SQLSERVER_PASS}"
+  driver: "ODBC Driver 17 for SQL Server"
+  table: "products"                   # Table to extract from
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SOURCE: Excel File
+# ─────────────────────────────────────────────────────────────────────────────
+excel_source:
+  file_path: "data/sample_customers.xlsx"
+  sheet_name: "Customers"             # Sheet name or index (0-based int)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TARGET: MySQL Database (Load Destination)
+# ─────────────────────────────────────────────────────────────────────────────
+mysql_target:
+  host: "${MYSQL_TARGET_HOST}"        # e.g., localhost
+  port: 3306
+  database: "${MYSQL_TARGET_DB}"      # e.g., pipeline_output
+  username: "${MYSQL_TARGET_USER}"
+  password: "${MYSQL_TARGET_PASS}"
+  table: "pipeline_output"            # Destination table name
+  if_exists: "replace"                # Options: "replace", "append", "fail"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PIPELINE SETTINGS
+# ─────────────────────────────────────────────────────────────────────────────
+pipeline:
+  log_level: "INFO"                   # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: "logs/pipeline.log"
+  chunk_size: 1000                    # Number of rows per DB insert batch

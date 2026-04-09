@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables — NEVER commit this
+.env
+
+# Logs
+logs/
+
+# Generated data files
+data/pipeline_output.csv
+data/mock_orders.csv
+data/mock_products.csv
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
